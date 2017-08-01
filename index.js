@@ -24,7 +24,7 @@ module.exports = {
         },
 
         rootDir: function(context) {
-          return context.project.root;
+          return context.project.getProjectRoot();
         },
 
         scm: function(/* context */) {
@@ -67,6 +67,8 @@ module.exports = {
         var ScmDataGenerator = this.readConfig('scm');
         if (ScmDataGenerator) {
           var path = this.readConfig('rootDir');
+          console.log(`rootDir: ${path}`);
+          console.log(`destDir: ${this.readConfig('destDir')}`);
           return new ScmDataGenerator(path).generate();
         } else {
           return RSVP.resolve();
